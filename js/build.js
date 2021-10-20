@@ -13,8 +13,32 @@ fetch('https://jsonplaceholder.typicode.com/users')
             td.appendChild(textNode);
             tr.appendChild(td);
         }
+        tr.dataset.userId = user.id;
         tbody.appendChild(tr);
     }
     return document.getElementsByTagName('table')[0].appendChild(tbody);
+})
+    .then(function (result) {
+    document.querySelectorAll('tbody tr').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            document.getElementById('modalContainer').style.display = 'block';
+            fetch('https://jsonplaceholder.typicode.com/todos')
+                .then(function (response) { return response.json(); })
+                .then(function (todos) {
+                var modalTodos = document.querySelector('#modalContainer ul');
+                for (var _i = 0, todos_1 = todos; _i < todos_1.length; _i++) {
+                    var todo = todos_1[_i];
+                    var tableRow = e.target;
+                    if (todo.userId.toString() === tableRow.parentElement.dataset.userId.toString()) {
+                        var li = document.createElement('li');
+                        var todoTitle = document.createTextNode(todo.title);
+                        li.appendChild(todoTitle);
+                        modalTodos.appendChild(li);
+                    }
+                }
+            })
+                .catch(function (err) { console.log(err); });
+        });
+    });
 })
     .catch(function (err) { console.log(err); });
