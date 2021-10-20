@@ -42,4 +42,9 @@ fetch('https://jsonplaceholder.typicode.com/users')
     })
     .catch(err => { console.log(err); });
 
-//document.getElementsById('')
+window.onclick = e => {
+    let modal = document.getElementById('modalContainer');
+    if (e.target == modal) {
+        modal.style.display = "none";
+    }
+}

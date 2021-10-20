@@ -42,3 +42,9 @@ fetch('https://jsonplaceholder.typicode.com/users')
     });
 })
     .catch(function (err) { console.log(err); });
+window.onclick = function (e) {
+    var modal = document.getElementById('modalContainer');
+    if (e.target == modal) {
+        modal.style.display = "none";
+    }
+};
