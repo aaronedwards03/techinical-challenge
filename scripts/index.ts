@@ -46,5 +46,6 @@ window.onclick = e => {
     let modal = document.getElementById('modalContainer');
     if (e.target == modal) {
         modal.style.display = "none";
+        document.getElementById('modalBody').innerHTML = '';
     }
 }
